@@ -48,40 +48,5 @@ public class coinChange {
         return dp[total];
     }
 
-    private static int getMaxProfit(int[] coins, int n, int capacity) {
-
-        int[][] dp = new int[n + 1][capacity + 1];
-        for (int i = 0; i < n + 1; i++) {
-            for (int j = 0; j < capacity + 1; j++) {
-                dp[i][j] = -1;
-            }
-        }
-
-        if (n == 0)
-            return 0;
-
-        if (dp[n - 1][capacity - 1] >= 0)
-            return dp[n - 1][capacity - 1];
-
-        int include = Integer.MAX_VALUE;
-        if (coins[n - 1] <= capacity)
-            include = 1 + getMaxProfit(coins, n - 1, capacity - coins[n - 1]);
-        int exclude = getMaxProfit(coins, n - 1, capacity);
-        dp[n - 1][capacity - 1] = Math.max(include, exclude);
-
-        for (int i = 0; i < n + 1; i++) {
-            for (int j = 0; j < capacity + 1; j++) {
-                System.out.print(dp[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        // return dp[n - 1][capacity - 1];
-        if (dp[n - 1][capacity - 1] == 1)
-            return -1;
-        else
-            return dp[n - 1][capacity - 1];
-
-    }
 
 }
